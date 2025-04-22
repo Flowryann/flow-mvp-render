@@ -5,13 +5,13 @@ import random
 
 st.title("🌀 FLOW Watches – Social Media MVP")
 
-# --- OpenAI API-Key aus Umgebungsvariablen ---
+# --- OpenAI API-Key ---
 api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
     st.error("❌ OpenAI API-Key nicht gefunden. Bitte setze die Umgebungsvariable OPENAI_API_KEY.")
     st.stop()
-else:
-    openai.api_key = api_key
+
+client = openai.OpenAI(api_key=api_key)
 
 # --- Eingabe UI ---
 st.header("📋 Inhalt konfigurieren")
@@ -34,7 +34,7 @@ Füge passendes Storytelling und CTA hinzu. Thema: {thema}
 Text:
 {text}
 """
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}]
     )
@@ -46,7 +46,7 @@ Du bist ein Social-Media-Editor. Gib Feedback zu diesem Beitrag für {plattform}
 Text:
 {text}
 """
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}]
     )
@@ -80,4 +80,4 @@ if st.button("🚀 Content generieren"):
     st.metric("Kommentare", random.randint(5, 30))
 
 st.markdown("---")
-st.caption("FLOW MVP v0.3 powered by GPT-4")
+st.caption("FLOW MVP v0.3 – jetzt OpenAI 1.x ready 🚀")
