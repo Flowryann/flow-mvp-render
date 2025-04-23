@@ -18,7 +18,8 @@ client = openai.OpenAI(api_key=api_key)
 notion = Client(auth=os.getenv("NOTION_API_KEY"))
 
 # Die ID deiner Notion-Datenbank
-database_id = "deine-datenbank-id-hier"
+database_id = "# Die ID deiner Notion-Datenbank
+database_id = '1b31176a87d580c0a596e049fd33cdb8"
 
 # Funktion, um Daten aus Notion zu abrufen
 def fetch_data_from_notion():
